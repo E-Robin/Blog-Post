@@ -1,17 +1,23 @@
 <!-- <div class="container-fluid  ">
     <div class="row">
         <div class="col"> -->
-            <form class=" card text-center mt-3 mb-3" >
+            <div *ngIf="isSubscribed" >
+                <div class="card card-body text-center bg-info "  >
+                    <h1>Thanks for subscription</h1>
+                </div>
+            </div>
+
+            <form  *ngIf="!isSubscribed"  #subscriptionForm="ngForm" class=" card text-center mt-3 mb-3" (ngSubmit)="submit(subscriptionForm.value)" >
                 <h5>SUBSCRIPTION FORM</h5>
                 <div  class="d-flex  justify-content-center ">
                     <div>
-                        <input type="text" placeholder="NAME">
+                        <input type="text" placeholder="NAME" ngModel name="name" required >
                     </div>
                     <div>
-                        <input type="text" placeholder="EMAIL">
+                        <input type="text" placeholder="EMAIL" ngModel name="email" required>
                     </div>
                     <div>
-                        <button class="bg-success text-white">Submit</button>
+                        <button class="bg-success text-white" [disabled]="subscriptionForm.invalid" >Submit</button>
                     </div>
                 </div>
             </form>

@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {FirestoreModule} from '@angular/fire/firestore';
 
+import {AngularFireModule} from '@angular/fire/compat';
+// import {AngularFirestoreModule} from '@angular/fire/compat/firestore/firestore.module';
+
+import {FormsModule} from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -16,6 +21,10 @@ import { TermsConditionComponent } from './pages/terms-condition/terms-condition
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { PostCardComponent } from './shared/post-card/post-card.component';
+import { env } from 'environment.prod';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -34,10 +43,18 @@ import { PostCardComponent } from './shared/post-card/post-card.component';
     AboutUsComponent,
     PostCardComponent,
     
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(env.firebaseConfig),
+    // AngularFirestoreModule,
+    FirestoreModule,
+    FormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

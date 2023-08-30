@@ -1,14 +1,18 @@
-<section class="featured-section p-5 bg-info"> 
+<section class="featured-section p-5 bg-info" *ngIf="posts" > 
  
     <div class="container-fluid">
         <div class="row">
+
             <div class="col-md-12 text-center mb-3">
                 <h4>Featured post</h4>
                 <p>These are the featured post here!</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 ">
+            <div class="col-md-3 " *ngFor="let post of posts" >
+                <app-post-card [post]="post" ></app-post-card>
+            </div>
+            <!-- <div class="col-md-3 ">
                 <app-post-card></app-post-card>
             </div>
             <div class="col-md-3 ">
@@ -16,10 +20,7 @@
             </div>
             <div class="col-md-3 ">
                 <app-post-card></app-post-card>
-            </div>
-            <div class="col-md-3 ">
-                <app-post-card></app-post-card>
-            </div>
+            </div> -->
             <!-- <div class="col-md-3">
                 <app-post-card></app-post-card>
             </div>
@@ -59,4 +60,4 @@
 </section>
 
 
-<app-subscription-form></app-subscription-form>
+<app-subscription-form  [isSubscribed]="isSubscribed" (subscriptionData)="subscription($event)" ></app-subscription-form>

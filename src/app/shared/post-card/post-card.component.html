@@ -1,5 +1,5 @@
-<div class="card mb-3" style="width: auto; ">
-    <img class="card-img-top" src="../../../assets/3.jpg" alt="Card image cap" >
+<div class="card mb-3" style="width: auto; "  *ngIf="post">
+    <img class="card-img-top" src='{{post.data.postImgPath}}'   alt="Card image cap" height="300" >
     <div class="card-body">
         <!-- <ul class="list">
             <li>feature</li>
@@ -10,9 +10,9 @@
         <small class="text-primary" > Featured</small>
         <small class="text-info" >views</small>
         <!-- <small class="text-success">updates</small>   -->
-      <h5 class="card-title">Card title</h5>
+      <h5 class="card-title">{{post.data.category.categoryName}}</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a   routerLink="single-post" class="btn btn-primary">Go somewhere</a>
+      <a   routerLink="single-post" [queryParams]="{id : post.id}"  class="btn btn-primary">Detail</a>
     </div>
   </div>
 
