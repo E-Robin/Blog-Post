@@ -11,6 +11,7 @@ export class SubscriptionFormComponent {
 
   
   @Input() isSubscribed:boolean = false;
+  @Input() isDuplicateEmail : boolean = false;
   @Output() subscriptionData = new EventEmitter<any>
   @ViewChild('subscriptionForm')
   form!: NgForm;
@@ -23,6 +24,8 @@ export class SubscriptionFormComponent {
       name:formData.name,
       email:formData.email
     }
+
+    
     this.subscriptionData.emit(subscriptionData)
     
     

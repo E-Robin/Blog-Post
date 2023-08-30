@@ -11,7 +11,8 @@ import { SubscriptionService } from 'src/app/service/subscription.service';
 })
 export class HomeComponent {
 
-  isSubscribed:boolean = false
+  isSubscribed:boolean = false;
+  isDuplicateEmail = false;
   posts!:any[];
 
   constructor(private afs:AngularFirestore ,
@@ -38,14 +39,30 @@ export class HomeComponent {
   }
 
   subscription(subscriber:Subscription){
-    this._subscriptionService.addSubscription(subscriber)
-    .then(
-      res=>{
-        this._toastService.success('Subscription added successfully');
-        this.isSubscribed = true
-        localStorage.setItem('isSubcribed','true')
+
+    this._subscriptionService.checkSubscription(subscriber.email).subscribe(res=>{
+
+      if(res.empty){
+        this._subscriptionService.addSubscription(subscriber)
+        .then(
+          res=>{
+            this._toastService.success('Subscription added successfully');
+            this.isSubscribed = true
+            this.isDuplicateEmail = false
+            localStorage.setItem('isSubcribed','true')
+          }
+         )
+
       }
-     )
+      else{
+        this.isDuplicateEmail = true
+
+      }
+    })
+    
+   
   }
+
+  
 
 }

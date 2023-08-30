@@ -34,7 +34,10 @@
     </div>
     <div class="row">
         <div class="col">
-            <app-subscription-form  [isSubscribed]="isSubscribed" (subscriptionData)="subscription($event)" ></app-subscription-form>
+            <app-subscription-form  
+                [isSubscribed]="isSubscribed"
+                (subscriptionData)="subscription($event)"
+                [isDuplicateEmail]="isDuplicateEmail" ></app-subscription-form>
         </div>
     </div>
 </div>

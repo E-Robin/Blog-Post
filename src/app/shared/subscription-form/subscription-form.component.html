@@ -7,6 +7,12 @@
                 </div>
             </div>
 
+            <div *ngIf="isDuplicateEmail" >
+                <div class="card card-body text-center bg-info "  >
+                     <h3 style="color: red;" >Email is already exist , Try with other account</h3>
+                </div>
+            </div>
+
             <form  *ngIf="!isSubscribed"  #subscriptionForm="ngForm" class=" card text-center mt-3 mb-3" (ngSubmit)="submit(subscriptionForm.value)" >
                 <h5>SUBSCRIPTION FORM</h5>
                 <div  class="d-flex  justify-content-center row" style="width: fit-content; margin: auto;">
@@ -16,7 +22,7 @@
                     <div  class="col-sm-8 col-md-4 ">
                         <input type="text" placeholder="EMAIL" ngModel name="email" required>
                     </div>
-                    <div class="col-sm-8 col-md-4">
+                    <div class="col-sm-8 col-md-4" style="width: auto;" >
                         <button class="bg-success text-white " [disabled]="subscriptionForm.invalid" >Submit</button>
                     </div>
                 </div>

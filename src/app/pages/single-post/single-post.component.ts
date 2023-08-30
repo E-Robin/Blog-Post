@@ -14,6 +14,7 @@ import { SubscriptionService } from 'src/app/service/subscription.service';
 })
 export class SinglePostComponent {
 
+  isDuplicateEmail:boolean = false
   isSubscribed:boolean  = false
   singlePost!: any ;
   
@@ -45,15 +46,40 @@ export class SinglePostComponent {
 
   }
 
+  // subscription(subscriber:Subscription){
+  //   this._subscriptionService.addSubscription(subscriber)
+  //   .then(
+  //     res=>{
+  //       this._toastService.success('Subscription added successfully');
+  //       this.isSubscribed = true
+  //     }
+  //    )
+  // }
   subscription(subscriber:Subscription){
-    this._subscriptionService.addSubscription(subscriber)
-    .then(
-      res=>{
-        this._toastService.success('Subscription added successfully');
-        this.isSubscribed = true
+
+    this._subscriptionService.checkSubscription(subscriber.email).subscribe(res=>{
+
+      if(res.empty){
+        this._subscriptionService.addSubscription(subscriber)
+        .then(
+          res=>{
+            this._toastService.success('Subscription added successfully');
+            this.isSubscribed = true
+            this.isDuplicateEmail = false
+            localStorage.setItem('isSubcribed','true')
+          }
+         )
+
       }
-     )
+      else{
+        this.isDuplicateEmail = true
+
+      }
+    })
+    
+   
   }
+
   
 
 }
